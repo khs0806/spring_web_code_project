@@ -15,11 +15,15 @@
 				</div>
 				<!-- /.box-header -->
 
-				<form role="form" method="post">
+<form role="form" action="modifyPage" method="post">
 
-					<input type='hidden' name='bno' value="${boardVO.bno}">
+	<input type='hidden' name='bno' value="${boardVO.bno}"> <input
+		type='hidden' name='page' value="${cri.page}"> <input
+		type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	<input type='hidden' name='searchType' value="${cri.searchType}">
+	<input type='hidden' name='keyword' value="${cri.keyword}">
 
-				</form>
+</form>
 
 				<div class="box-body">
 					<div class="form-group">
@@ -43,38 +47,45 @@
 				<div class="box-footer">
 					<button type="submit" class="btn btn-warning">Modify</button>
 					<button type="submit" class="btn btn-danger">REMOVE</button>
-					<button type="submit" class="btn btn-primary">LIST ALL</button>
+					<button type="submit" class="btn btn-primary">GO LIST</button>
 				</div>
 
 
-				<script>
-					$(document).ready(function() {
+<script>
+	$(document).ready(function() {
 
-						var formObj = $("form[role='form']");
+		var formObj = $("form[role='form']");
 
-						console.log(formObj);
+		console.log(formObj);
 
-						$(".btn-warning").on("click", function() {
-							formObj.attr("action", "/board/modify");
-							formObj.attr("method", "get");
-							formObj.submit();
-						});
+		$(".btn-warning").on("click", function() {
+			formObj.attr("action", "/sboard/modifyPage");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
 
-						$(".btn-danger").on("click", function() {
-							formObj.attr("action", "/board/remove");
-							formObj.submit();
-						});
+		$(".btn-danger").on("click", function() {
+			formObj.attr("action", "/sboard/removePage");
+			formObj.submit();
+		});
 
-						$(".btn-primary").on("click", function() {
-							self.location = "/board/listCri";
-						});
+		$(".btn-primary").on("click", function() {
+			formObj.attr("method", "get");
+			formObj.attr("action", "/sboard/list");
+			formObj.submit();
+		});
 
-					});
-				</script>
+	});
+</script>
+
+
+
+
 			</div>
 			<!-- /.box -->
 		</div>
 		<!--/.col (left) -->
+
 	</div>
 	<!-- /.row -->
 </section>

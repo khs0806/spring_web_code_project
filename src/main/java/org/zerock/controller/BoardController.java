@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
+import org.zerock.domain.SearchCriteria;
 import org.zerock.service.BoardService;
 
 @Controller
@@ -45,20 +46,19 @@ public class BoardController {
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
 		//return "/board/success";
-		return "redirect:/board/listAll";
+		return "redirect:/board/listCri";
 	}
 
 	// 게시물 리스트 뿌리기
 	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
-	public void listAll(Criteria cri, Model model) throws Exception {
+	public void listAll(SearchCriteria cri, Model model) throws Exception {
 
 		logger.info("show list Page with Criteria......................");
 
-		model.addAttribute("list", service.listCriteria(cri));
 	}
 
 	// 게시물 상세 보기
-	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public void read(@RequestParam("bno") int bno, 
 				@ModelAttribute("cri") Criteria cri, 
 				Model model) throws Exception {
@@ -77,7 +77,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "redirect:/board/listPage";
+		return "redirect:/board/listCri";
 	}
 
 	// 게시물 수정뷰 뿌리기
@@ -102,7 +102,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "redirect:/board/listPage";
+		return "redirect:/board/listCri";
 	}
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
